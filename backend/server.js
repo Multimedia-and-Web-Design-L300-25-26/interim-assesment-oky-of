@@ -1,6 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 
 import connectDB from "./config/db.js"
 
@@ -15,6 +16,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 app.get("/", (req, res) => {
     res.send("Coinbase API Running")
@@ -24,6 +26,9 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes)
 app.use("/api/crypto", cryptoRoutes)
 app.use("/api/user", userRoutes)
+app.use("/", authRoutes)
+app.use("/crypto", cryptoRoutes)
+app.use("/", userRoutes)
 
 const PORT = process.env.PORT || 5000
 

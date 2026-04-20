@@ -1,5 +1,4 @@
 import express from "express"
-import auth from "../middleware/authMiddleware.js"
 import {
     getAll,
     getGainers,

@@ -2,11 +2,31 @@ import mongoose from "mongoose"
 
 const cryptoSchema = new mongoose.Schema(
 {
-    name: String,
-    symbol: String,
-    price: Number,
-    image: String,
-    change24h: Number
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    symbol: {
+        type: String,
+        required: true,
+        trim: true,
+        uppercase: true
+    },
+    price: {
+        type: Number,
+        required: true,
+        min: 0
+    },
+    image: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    change24h: {
+        type: Number,
+        required: true
+    }
 },
 { timestamps: true }
 )
