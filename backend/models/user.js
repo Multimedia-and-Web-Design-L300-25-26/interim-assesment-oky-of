@@ -14,11 +14,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 6,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },  
+  }, 
 });
 
 export default mongoose.model("User", userSchema);
