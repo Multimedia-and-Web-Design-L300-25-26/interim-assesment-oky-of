@@ -6,6 +6,9 @@ import rateLimit from "express-rate-limit"
 
 import connectDB from "./config/db.js"
 
+import { loginUser, registerUser } from "./controllers/authController.js"
+import { getProfile } from "./controllers/userController.js"
+import { protect } from "./middleware/authMiddleware.js"
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js"
 import authRoutes from "./routes/authRoutes.js"
 import cryptoRoutes from "./routes/cryptoRoutes.js"
@@ -27,14 +30,33 @@ app.use(helmet())
 app.use(limiter)
 app.use(express.json({ limit: "10kb" }))
 
+app.get("/", (req, res) => {
+    res.send("Coinbase API Running")
+})
+
 app.get("/api", (req, res) => {
     res.send("Coinbase API Running")
 })
+
+app.get("/register", (req, res) => {
+    res.status(405).json({ message: "Use POST /register to create an account" })
+})
+
+app.post("/register", registerUser)
+
+app.get("/login", (req, res) => {
+    res.status(405).json({ message: "Use POST /login to authenticate" })
+})
+
+app.post("/login", loginUser)
+
+app.get("/profile", protect, getProfile)
 
 // routes
 app.use("/api/auth", authRoutes)
 app.use("/api/crypto", cryptoRoutes)
 app.use("/api/user", userRoutes)
+app.use("/crypto", cryptoRoutes)
 app.use(notFound)
 app.use(errorHandler)
 

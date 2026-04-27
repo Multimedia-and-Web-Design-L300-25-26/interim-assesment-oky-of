@@ -3,6 +3,16 @@ import { registerUser, loginUser } from "../controllers/authController.js";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.json({
+    message: "Auth API is running",
+    endpoints: {
+      register: "POST /api/auth/register",
+      login: "POST /api/auth/login",
+    },
+  });
+});
+
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/register", (req, res) => {
