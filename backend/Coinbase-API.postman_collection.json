@@ -100,6 +100,28 @@
       }
     },
     {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/user",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "user"
+          ]
+        }
+      }
+    },
+    {
       "name": "Get All Crypto",
       "request": {
         "method": "GET",
